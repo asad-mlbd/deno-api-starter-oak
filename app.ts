@@ -5,6 +5,7 @@ import { router } from "./routes/routes.ts";
 const port = 8000;
 const app = new Application();
 
+app.use(middlewares.errorMiddleware);
 app.use(middlewares.loggerMiddleware);
 app.use(middlewares.timingMiddleware);
 

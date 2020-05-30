@@ -1,9 +1,9 @@
-import { Router } from "https://deno.land/x/oak/mod.ts";
+import { Router, Context } from "https://deno.land/x/oak/mod.ts";
 import * as userRoutes from "./user.routes.ts";
 
 const router: Router = new Router();
 
-router.get("", (ctx) => {
+router.get("", (ctx: Context) => {
   ctx.response.body = "hello world";
 });
 

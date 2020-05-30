@@ -32,4 +32,5 @@ $ docker exec -it api-starter-deno_deno_1 deno run --allow-net --allow-read http
 - Sample middleware added
     - [Logger Middleware](/middlewares/logger.middleware.ts)
     - [Timing Middleware](/middlewares/timing.middleware.ts)
+    - [Error Logger](/middlewares/error.middleware.ts)
 - [More details on writing middleware](https://deno.land/x/oak#application-middleware-and-context).
