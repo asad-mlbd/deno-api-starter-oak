@@ -26,3 +26,10 @@ $ docker exec -it api-starter-deno_deno_1 deno run --allow-net --allow-read http
 ```
 
 - With the above step, the user table should be created and dumped with some user list. Browse [http://localhost:8000/users](http://localhost:8000/users) to get a list of users.
+
+## Middlewares
+- Middlewares are defined in `middlewares/` folder.
+- Sample middleware added
+    - [Logger Middleware](/middlewares/logger.middleware.ts)
+    - [Timing Middleware](/middlewares/timing.middleware.ts)
+- [More details on writing middleware](https://deno.land/x/oak#application-middleware-and-context).
