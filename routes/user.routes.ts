@@ -1,4 +1,4 @@
-import { Context, helpers } from "https://deno.land/x/oak/mod.ts";
+import { Context, helpers } from "https://deno.land/x/oak@v5.0.0/mod.ts";
 import * as userRepo from "./../repositories/user.repository.ts";
 
 const getUsers = async (ctx: Context) => {
@@ -8,7 +8,7 @@ const getUsers = async (ctx: Context) => {
 
 const getUserById = async (ctx: Context) => {
   const { id } = helpers.getQuery(ctx, { mergeParams: true });
-  const user = await userRepo.getUserById(id);
+  const user = await userRepo.getUserById(+id);
   ctx.response.body = user;
 };
 

@@ -1,4 +1,4 @@
-import { Application, Context } from "https://deno.land/x/oak/mod.ts";
+import { Application } from "https://deno.land/x/oak@v5.0.0/mod.ts";
 import * as middlewares from "./middlewares/middlewares.ts";
 import { router } from "./routes/routes.ts";
 

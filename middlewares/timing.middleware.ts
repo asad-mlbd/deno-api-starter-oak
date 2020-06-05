@@ -1,4 +1,4 @@
-import { Context } from "https://deno.land/x/oak/mod.ts";
+import { Context } from "https://deno.land/x/oak@v5.0.0/mod.ts";
 const timingMiddleware = async (ctx: Context, next: () => Promise<void>) => {
   const start = Date.now();
   await next();

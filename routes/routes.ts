@@ -1,4 +1,4 @@
-import { Router, Context } from "https://deno.land/x/oak/mod.ts";
+import { Router, Context } from "https://deno.land/x/oak@v5.0.0/mod.ts";
 import * as userRoutes from "./user.routes.ts";
 
 const router: Router = new Router();
