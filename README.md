@@ -13,14 +13,14 @@ This is a starter project to create Deno RESTful API using oak. [oak](https://gi
  6) [Roadmap](#roadmap)
 
 ## Setup
-We can run the project **with/ with out Docker**. 
+We can run the project **with/ without Docker**. 
 - **Pre-Requisite**
     - For dockerized environment we need 
         - docker, 
         - docker-compose installed.
-    - To run api server with out Docker we need
-        - mysql server running &
-        - Deno run time intstalled
+    - To run API server with out Docker we need
+        - MySQL server running &
+        - Deno run time installed
 - **Configuration**
     - In application root, rename example env file `env.example` to `.env`.
     - An example env file contains MySQL credentials for the dockerized environment. For non-docker setup, **update MySQL credentials** here.
@@ -36,7 +36,7 @@ We can run the project **with/ with out Docker**.
     ```
 - **API** 
     - Browse `api` at [http://localhost:8000](http://localhost:8000)
-    - Browse (for Docker only) db `adminer` at [http://localhost:8080](http://localhost:8080)
+    - Browse (for Docker only) DB `adminer` at [http://localhost:8080](http://localhost:8080)
 
 ## Migrations 
 We use [nessie](https://deno.land/x/nessie) to manage database migration. 
@@ -63,7 +63,7 @@ deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie/cli.t
 |[nessie](https://deno.land/x/nessie/mod.ts)| DB migration tool for Deno|
 
 ## Middlewares
-- Middlewares are defined in `middlewares/` folder.
+- Middlewares are defined in the `middlewares/` folder.
 - Sample middleware added
     - [Logger Middleware](/middlewares/logger.middleware.ts)
     - [Timing Middleware](/middlewares/timing.middleware.ts)
