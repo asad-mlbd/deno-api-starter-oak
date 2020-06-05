@@ -8,9 +8,10 @@ This is a starter project to create Deno RESTful API using oak. [oak](https://gi
  1) [Setup](#setup)
  2) [Migrations](#migrations)
  3) [Modules](#modules)
- 4) [Contributing](#contributing)
- 5) [Contributors](#contributors)
- 6) [Roadmap](#roadmap)
+ 4) [Project Layout](#project-layout)
+ 5) [Contributing](#contributing)
+ 6) [Contributors](#contributors)
+ 7) [Roadmap](#roadmap)
 
 ## Setup
 We can run the project **with/ without Docker**. 
@@ -61,6 +62,31 @@ deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie/cli.t
 |[dotenv@v0.4.2](https://deno.land/x/dotenv@v0.4.2/mod.ts)| Read env variables|
 |[mysql@2.2.0](https://deno.land/x/mysql@2.2.0/mod.ts)|MySQL driver for Deno|
 |[nessie](https://deno.land/x/nessie/mod.ts)| DB migration tool for Deno|
+
+### Project Layout 
+
+```
+.
+├── .env (Make sure to create this file from given .env.example)
+├── config
+|   ├── config.ts (contains config object with env vars as attribute)
+├── db
+|   ├── db.ts (contains DB connection object)
+├── middlewares
+|   ├── error.middleware.ts (error handler middleware)
+|   ├── logger.middleware.ts (request logger)
+|   ├── timing.middleware.ts (timing middleware logging request dispatch time)
+|   ├── middlewares.ts (exports all middlewares)
+├── migrations (contains DB migration scripts)
+├── repositories
+|   ├── user.repository.ts (contains repository methods for user table)
+├── routes
+|   ├── user.routes.ts (router handler methods for user routes)
+|   ├── routes.ts (bind router handlers with app routes)
+├── app.ts (Contains application server)
+└── nessie.config.ts (DB configuration for nessie migration)
+```
+
 
 ## Middlewares
 - Middlewares are defined in the `middlewares/` folder.
