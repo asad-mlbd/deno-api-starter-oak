@@ -1,53 +1,53 @@
-# Deno REST API using OAK
+# Deno RESTful API using OAK
 
 <img src="https://deno.land/images/deno_logo.png" alt="logo" width="300"/>
 
-This is a starter project to create DENO RESTful API using oak. [oak](https://github.com/oakserver/oak) is a middleware framework and router middleware for DENO, inspired by popular node.js framework [Koa](https://koajs.com/) and [@koa/router](https://github.com/koajs/router/).
+This is a starter project to create Deno RESTful API using oak. [oak](https://github.com/oakserver/oak) is a middleware framework and router middleware for Deno, inspired by popular Node.js framework [Koa](https://koajs.com/) and [@koa/router](https://github.com/koajs/router/).
 
 ## Important links
  1) [Setup](#setup)
- 2) [Migration](#migration)
+ 2) [Migrations](#migrations)
  3) [Modules](#modules)
  4) [Contributing](#contributing)
  5) [Contributors](#contributors)
  6) [Roadmap](#roadmap)
 
 ## Setup
-We can run the project **with/ with out docker**. 
-- **Pre-requisited**
+We can run the project **with/ with out Docker**. 
+- **Pre-Requisite**
     - For dockerized environment we need 
         - docker, 
         - docker-compose installed.
-    - To run api server with out docker we need
+    - To run api server with out Docker we need
         - mysql server running &
-        - deno run time intstalled
+        - Deno run time intstalled
 - **Configuration**
     - In application root, rename example env file `env.example` to `.env`.
     - An example env file contains MySQL credentials for the dockerized environment. For non-docker setup, **update MySQL credentials** here.
 - **Run API**
-    - **For docker**: Up docker-compose, this will create a docker container with the database with the given name in env. 
+    - **For Docker**: Up docker-compose, this will create a docker container with the database with the given name in env. 
     ``` 
     $ docker-compose up --build
     ```
 
-    - For non-docker run API server with DENO run time
+    - For non-docker run API server with Deno run time
     ```
     $ deno run --allow-read --allow-net app.ts
     ```
 - **API** 
     - Browse `api` at [http://localhost:8000](http://localhost:8000)
-    - Browse (for docker only) db `adminer` at [http://localhost:8080](http://localhost:8080)
+    - Browse (for Docker only) db `adminer` at [http://localhost:8080](http://localhost:8080)
 
-### Migration 
+## Migrations 
 We use [nessie](https://deno.land/x/nessie) to manage database migration. 
 - In the application root, we have `nessie.config.ts`. Make sure to update this with the DB credentials. 
 - Run the following command to run the migration. Migration should create necessary tables and dump the data.
 ```
 $ deno run --allow-net --allow-read https://deno.land/x/nessie/cli.ts migrate
 ```
-This would create the user table and dump the user list.
+With this, the user table would be created and the table would be seeded with fake data
 
-- Further, To add new migration, for example, to create new product table run
+- Further, to add new migration, for example, to create new product table run
 ```
 deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie/cli.ts make create_product
 ```
