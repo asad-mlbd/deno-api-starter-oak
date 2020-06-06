@@ -1,4 +1,8 @@
-import { Context, helpers } from "https://deno.land/x/oak@v5.0.0/mod.ts";
+import {
+  Context,
+  helpers,
+  Status,
+} from "https://deno.land/x/oak@v5.0.0/mod.ts";
 import * as userRepo from "./../repositories/user.repository.ts";
 
 const getUsers = async (ctx: Context) => {
@@ -19,4 +23,18 @@ const createUser = async (ctx: Context) => {
   ctx.response.body = user;
 };
 
-export { getUsers, getUserById, createUser };
+const updateUser = async (ctx: Context) => {
+  const { id } = helpers.getQuery(ctx, { mergeParams: true });
+  const request = ctx.request;
+  const userData = (await request.body()).value;
+  const user = await userRepo.updateUser(+id, userData);
+  ctx.response.body = user;
+};
+
+const deleteUser = async (ctx: Context) => {
+  const { id } = helpers.getQuery(ctx, { mergeParams: true });
+  await userRepo.deleteUser(+id);
+  ctx.response.status = Status.NoContent;
+};
+
+export { getUsers, getUserById, createUser, updateUser, deleteUser };

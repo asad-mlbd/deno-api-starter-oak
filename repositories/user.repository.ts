@@ -38,4 +38,45 @@ const createUser = async (user: { name: string; email: string }) => {
   return users[0];
 };
 
-export { getUsers, getUserById, createUser };
+/**
+ * Update user
+ */
+const updateUser = async (
+  id: number,
+  user: { name: string; email: string },
+) => {
+  const { name, email } = user;
+  await db.query(
+    `
+    UPDATE users SET
+      name = ?,
+      email = ?,
+      updated_at = DEFAULT
+    WHERE id = ?;
+    `,
+    [name, email, id],
+  );
+  const users = await db.query(
+    `SELECT * from users where id = ? limit 0, 1`,
+    [id],
+  );
+
+  return users[0];
+};
+
+/**
+ * Delete user
+ */
+const deleteUser = async (
+  id: number,
+) => {
+  await db.query(
+    `
+    DELETE FROM users
+    WHERE id = ?;
+    `,
+    [id],
+  );
+};
+
+export { getUsers, getUserById, createUser, updateUser, deleteUser };
