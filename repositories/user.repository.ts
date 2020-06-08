@@ -15,7 +15,7 @@ const getUserById = async (id: number) => {
     `select * from users where id = ? limit 0, 1`,
     [id],
   );
-  return users.length ? users[0] : {};
+  return users.length ? users[0] : null;
 };
 
 /**
@@ -46,7 +46,7 @@ const updateUser = async (
   user: { name: string; email: string },
 ) => {
   const { name, email } = user;
-  await db.query(
+  const result = await db.query(
     `
     UPDATE users SET
       name = ?,
@@ -56,12 +56,8 @@ const updateUser = async (
     `,
     [name, email, id],
   );
-  const users = await db.query(
-    `SELECT * from users where id = ? limit 0, 1`,
-    [id],
-  );
 
-  return users[0];
+  return result;
 };
 
 /**
@@ -70,13 +66,14 @@ const updateUser = async (
 const deleteUser = async (
   id: number,
 ) => {
-  await db.query(
+  const result = await db.query(
     `
     DELETE FROM users
     WHERE id = ?;
     `,
     [id],
   );
+  return result;
 };
 
 export { getUsers, getUserById, createUser, updateUser, deleteUser };
