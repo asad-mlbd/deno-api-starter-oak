@@ -1,5 +1,5 @@
 import * as userRepo from "./../repositories/user.repository.ts";
-import { httpErrors, HttpError } from "https://deno.land/x/oak@v5.0.0/mod.ts";
+import { httpErrors } from "https://deno.land/x/oak@v5.0.0/mod.ts";
 
 /**
  * get user by id
@@ -26,9 +26,18 @@ export const getUsers = async () => {
  */
 export const createUser = async (userData: any) => {
   // todo: validation
-  // todo: catch db error
-  const user = await userRepo.createUser(userData);
-  return user;
+  try {
+    const user = await userRepo.createUser(userData);
+    return user;
+  } catch (err) {
+    const { message } = err;
+    if (message.match("email_unique")) {
+      throw new httpErrors.BadRequest(
+        `Already user exists with email ${userData.email}`,
+      );
+    }
+    throw err;
+  }
 };
 
 /**
@@ -36,16 +45,24 @@ export const createUser = async (userData: any) => {
  */
 export const updateUser = async (id: number, userData: any) => {
   // todo: validation
-  // todo: catch db error
-  const result = await userRepo.updateUser(id, userData);
-  if (result["affectedRows"]) {
-    const user = await userRepo.getUserById(id);
-    if (user) {
-      return user;
+  try {
+    const result = await userRepo.updateUser(id, userData);
+    if (result["affectedRows"]) {
+      const user = await userRepo.getUserById(id);
+      if (user) {
+        return user;
+      }
     }
+    throw new httpErrors.NotFound("User not found");
+  } catch (err) {
+    const { message } = err;
+    if (message.match("email_unique")) {
+      throw new httpErrors.BadRequest(
+        `Already user exists with email ${userData.email}`,
+      );
+    }
+    throw err;
   }
-
-  throw new httpErrors.NotFound("User not found");
 };
 
 /**
