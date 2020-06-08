@@ -78,6 +78,9 @@ deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie/cli.t
 |   ├── timing.middleware.ts (timing middleware logging request dispatch time)
 |   ├── middlewares.ts (exports all middlewares)
 ├── migrations (contains DB migration scripts)
+├── services
+|   ├── services.ts (list services)
+|   ├── user.service.ts (user service layer)
 ├── repositories
 |   ├── user.repository.ts (contains repository methods for user table)
 ├── routes
@@ -86,6 +89,11 @@ deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie/cli.t
 ├── app.ts (Contains application server)
 └── nessie.config.ts (DB configuration for nessie migration)
 ```
+- route handlers should call service layer methods
+- service layer should deal with all business logics
+- service layer throws a meaningful error if needed
+- service layer uses repository layer methods for DB interaction
+- repository layer only deals with DB operation without any business logic
 
 
 ## Middlewares
