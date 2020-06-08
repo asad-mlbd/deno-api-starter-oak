@@ -1,7 +1,11 @@
-import { Schema } from "https://deno.land/x/nessie/mod.ts";
+import {
+  Migration,
+} from "https://deno.land/x/nessie@v1.0.0-rc3/mod.ts";
+import { Schema } from "https://deno.land/x/nessie@v1.0.0-rc3/qb.ts";
 
-export const up = (schema: Schema): void => {
-  schema.create("users", (table) => {
+/** Runs on migrate */
+export const up: Migration<Schema> = ({ queryBuilder }) => {
+  queryBuilder.create("users", (table) => {
     table.id();
     table.string("name", 256);
     table.string("email", 256);
@@ -9,7 +13,7 @@ export const up = (schema: Schema): void => {
     table.timestamps();
   });
 
-  schema.queryString(
+  queryBuilder.queryString(
     `
     INSERT into users VALUES
       (DEFAULT, 'Asad Rahman', 'asad.dk.bd@gmail.com', 1, DEFAULT, DEFAULT),
@@ -18,8 +22,11 @@ export const up = (schema: Schema): void => {
       (DEFAULT, 'John Doe', 'john@example.com', 1, DEFAULT, DEFAULT);
     `,
   );
+
+  return queryBuilder.query;
 };
 
-export const down = (schema: Schema): void => {
-  schema.drop("users");
+/** Runs on rollback */
+export const down: Migration<Schema> = ({ queryBuilder }) => {
+  return queryBuilder.drop("users");
 };
