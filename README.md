@@ -59,10 +59,11 @@ deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie@v1.0.
 
 | Package  | Purpose |
 | ---------|---------|
-|[oak@v5.0.0](https://deno.land/x/oak@v5.0.0/mod.ts)| Deno middleware framework|
-|[dotenv@v0.4.2](https://deno.land/x/dotenv@v0.4.2/mod.ts)| Read env variables|
-|[mysql@2.2.0](https://deno.land/x/mysql@2.2.0/mod.ts)|MySQL driver for Deno|
-|[nessie@v1.0.0-rc3](https://deno.land/x/nessie@v1.0.0-rc3/mod.ts)| DB migration tool for Deno|
+|[oak@v5.0.0](https://deno.land/x/oak@v5.0.0)| Deno middleware framework|
+|[dotenv@v0.4.2](https://deno.land/x/dotenv@v0.4.2)| Read env variables|
+|[mysql@2.2.0](https://deno.land/x/mysql@2.2.0)|MySQL driver for Deno|
+|[nessie@v1.0.0-rc3](https://deno.land/x/nessie@v1.0.0-rc3)| DB migration tool for Deno|
+|[validasaur@v0.7.0](https://deno.land/x/validasaur@v0.7.0)| validation library|
 
 ### Project Layout 
 
@@ -84,6 +85,7 @@ deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie@v1.0.
 |   ├── user.service.ts (user service layer)
 ├── repositories
 |   ├── user.repository.ts (contains repository methods for user table)
+├── helpers (contains helper methods)
 ├── routes
 |   ├── user.routes.ts (router handler methods for user routes)
 |   ├── routes.ts (bind router handlers with app routes)
@@ -116,6 +118,6 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/asad-m
 - [ ] Open API integration
 - [ ] Unit Testing
 - [ ] API Doc
-- [ ] Validation
+- [x] Validation
 - [ ] JWT Auth
 - [ ] Logger
