@@ -9,7 +9,7 @@ const clientOptions = {
 };
 
 const clientMySql = new ClientMySQL(clientOptions, {
-  hostname: "db",
+  hostname: "localhost",
   port: 3306,
   username: "root",
   password: "example", // uncomment this line for <8
