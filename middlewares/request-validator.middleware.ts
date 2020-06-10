@@ -6,7 +6,7 @@ import {
 import { Context, httpErrors } from "https://deno.land/x/oak@v5.0.0/mod.ts";
 
 /**
- * find single error message 
+ * get single error message from errors
  */
 const getErrorMessage = (
   errors: ValidationErrors,
@@ -20,19 +20,19 @@ const getErrorMessage = (
 };
 
 /**
- * generates request validation middleware 
- * for given validation rule
+ * request validation middleware 
+ * validate request body with given validation rules
  */
 const requestValidator = ({ bodyRules }: { bodyRules: ValidationRules }) => {
   return async (ctx: Context, next: () => Promise<void>) => {
     /** get request body */
     const request = ctx.request;
-    const userData = (await request.body()).value;
+    const body = (await request.body()).value;
 
     /** check rules */
-    const [isValid, errors] = await validate(userData, bodyRules);
+    const [isValid, errors] = await validate(body, bodyRules);
     if (!isValid) {
-      /**if error found, throw bad request error */
+      /** if error found, throw bad request error */
       const message = getErrorMessage(errors);
       throw new httpErrors.BadRequest(message);
     }
