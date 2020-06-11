@@ -6,13 +6,14 @@ import {
 } from "https://deno.land/x/validasaur@v0.7.0/src/rules.ts";
 
 import * as userService from "./../services/user.service.ts";
+import * as authService from "./../services/auth.service.ts";
 import { requestValidator } from "./../middlewares/request-validator.middleware.ts";
 
 /** 
  * request body schema 
  * for user create/update 
  * */
-const userSchema = {
+const registrationSchema = {
   name: [required],
   email: [required, isEmail],
   password: [required, lengthBetween(6, 12)],
@@ -25,15 +26,35 @@ const userSchema = {
  */
 const register = [
   /** request validation middleware */
-  requestValidator({ bodyRules: userSchema }),
+  requestValidator({ bodyRules: registrationSchema }),
   /** router handler */
   async (ctx: Context) => {
     const request = ctx.request;
     const userData = (await request.body()).value;
-    const user = await userService.createUser(userData);
-
+    const user = await authService.registerUser(userData);
     ctx.response.body = user;
   },
 ];
 
-export { register };
+/** 
+ * login body schema 
+ * for user create/update 
+ * */
+const loginSchema = {
+  email: [required, isEmail],
+  password: [required, lengthBetween(6, 12)],
+};
+
+const login = [
+  /** request validation middleware */
+  requestValidator({ bodyRules: loginSchema }),
+  /** router handler */
+  async (ctx: Context) => {
+    const request = ctx.request;
+    const credential = (await request.body()).value;
+    const token = await authService.loginUser(credential);
+    ctx.response.body = token;
+  },
+];
+
+export { login, register };

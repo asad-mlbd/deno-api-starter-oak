@@ -23,27 +23,6 @@ export const getUsers = async () => {
 };
 
 /**
- * create user
- */
-export const createUser = async (userData: any) => {
-  // todo: validation
-  try {
-    const password = userData.password;
-    userData.password = await encript(password);
-    const user = await userRepo.createUser(userData);
-    return user;
-  } catch (err) {
-    const { message } = err;
-    if (message.match("email_unique")) {
-      throw new httpErrors.BadRequest(
-        `Already user exists with email ${userData.email}`,
-      );
-    }
-    throw err;
-  }
-};
-
-/**
  * update user
  */
 export const updateUser = async (id: number, userData: any) => {

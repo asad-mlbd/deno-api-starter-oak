@@ -28,6 +28,22 @@ const getUserById = async (id: number) => {
 };
 
 /**
+ * get user by email
+ * return user info with password
+ */
+const getUserByEmail = async (email: string) => {
+  const users = await db.query(
+    `
+    SELECT
+      id, name, email, password,
+      is_active, created_at, updated_at
+    FROM users where email = ? limit 0, 1`,
+    [email],
+  );
+  return users.length ? users[0] : null;
+};
+
+/**
  * Create user
  */
 const createUser = async (
@@ -85,4 +101,11 @@ const deleteUser = async (
   return result;
 };
 
-export { getUsers, getUserById, createUser, updateUser, deleteUser };
+export {
+  getUsers,
+  getUserById,
+  getUserByEmail,
+  createUser,
+  updateUser,
+  deleteUser,
+};

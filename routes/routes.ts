@@ -10,6 +10,7 @@ router.get("", (ctx: Context) => {
 });
 
 router
+  .post("/login", ...authRoutes.login)
   .post("/register", ...authRoutes.register);
 
 router
