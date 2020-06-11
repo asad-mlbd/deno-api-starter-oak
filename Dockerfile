@@ -8,4 +8,4 @@ COPY . .
 
 USER deno
 RUN deno cache app.ts
-CMD ["run", "--allow-read", "--allow-net", "app.ts"]
+CMD ["run", "--allow-read", "--allow-net", "--unstable", "app.ts"]

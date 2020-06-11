@@ -4,7 +4,12 @@ import { db } from "./../db/db.ts";
  * Get all users list
  */
 const getUsers = async () => {
-  return await db.query(`select * from users`);
+  return await db.query(`
+    SELECT 
+      id, name, email, 
+      is_active, created_at, updated_at 
+    FROM users
+  `);
 };
 
 /**
@@ -12,7 +17,11 @@ const getUsers = async () => {
  */
 const getUserById = async (id: number) => {
   const users = await db.query(
-    `select * from users where id = ? limit 0, 1`,
+    `
+    SELECT
+      id, name, email, 
+      is_active, created_at, updated_at
+    FROM users where id = ? limit 0, 1`,
     [id],
   );
   return users.length ? users[0] : null;
@@ -21,21 +30,21 @@ const getUserById = async (id: number) => {
 /**
  * Create user
  */
-const createUser = async (user: { name: string; email: string }) => {
-  const { name, email } = user;
+const createUser = async (
+  user: { name: string; email: string; password: string },
+) => {
+  const { name, email, password } = user;
   const { lastInsertId } = await db.query(
     `
-    INSERT into users
-    VALUES (DEFAULT, ? , ? , 1, DEFAULT, DEFAULT);
+    INSERT into users 
+      (id, name, email, password, is_active, created_at, updated_at)
+    VALUES 
+      (DEFAULT, ? , ? , ?, 1, DEFAULT, DEFAULT);
     `,
-    [name, email],
-  );
-  const users = await db.query(
-    `SELECT * from users where id = ? limit 0, 1`,
-    [lastInsertId],
+    [name, email, password],
   );
 
-  return users[0];
+  return await getUserById(lastInsertId);
 };
 
 /**

@@ -1,5 +1,6 @@
 import * as userRepo from "./../repositories/user.repository.ts";
 import { httpErrors } from "https://deno.land/x/oak@v5.0.0/mod.ts";
+import { encript } from "../helpers/encription.ts";
 
 /**
  * get user by id
@@ -27,6 +28,8 @@ export const getUsers = async () => {
 export const createUser = async (userData: any) => {
   // todo: validation
   try {
+    const password = userData.password;
+    userData.password = await encript(password);
     const user = await userRepo.createUser(userData);
     return user;
   } catch (err) {

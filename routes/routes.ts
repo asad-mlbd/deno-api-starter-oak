@@ -1,4 +1,6 @@
 import { Router, Context } from "https://deno.land/x/oak@v5.0.0/mod.ts";
+
+import * as authRoutes from "./auth.routes.ts";
 import * as userRoutes from "./user.routes.ts";
 
 const router: Router = new Router();
@@ -6,6 +8,9 @@ const router: Router = new Router();
 router.get("", (ctx: Context) => {
   ctx.response.body = "hello world";
 });
+
+router
+  .post("/register", ...authRoutes.register);
 
 router
   .get("/users", userRoutes.getUsers)
