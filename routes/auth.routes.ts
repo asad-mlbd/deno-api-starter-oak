@@ -56,4 +56,19 @@ const login = [
   },
 ];
 
-export { login, register };
+const refreshTokenSchema = {
+  refresh_token: [required],
+};
+const refreshToken = [
+  /** request validation middleware */
+  requestValidator({ bodyRules: refreshTokenSchema }),
+  /** router handler */
+  async (ctx: Context) => {
+    const request = ctx.request;
+    const data = (await request.body()).value;
+    const token = await authService.refreshToken(data["refresh_token"]);
+    ctx.response.body = token;
+  },
+];
+
+export { login, register, refreshToken };

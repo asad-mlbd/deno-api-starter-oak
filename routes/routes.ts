@@ -11,7 +11,8 @@ router.get("", (ctx: Context) => {
 
 router
   .post("/login", ...authRoutes.login)
-  .post("/register", ...authRoutes.register);
+  .post("/register", ...authRoutes.register)
+  .post("/token", ...authRoutes.refreshToken);
 
 router
   .get("/users", userRoutes.getUsers)

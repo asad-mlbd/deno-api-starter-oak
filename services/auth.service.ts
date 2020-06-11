@@ -50,3 +50,29 @@ export const loginUser = async (credential: any) => {
 
   throw new httpErrors.Unauthorized("Wrong credential");
 };
+
+export const refreshToken = async (token: string) => {
+  try {
+    // todo: check token intention
+    const payload = await jwt.getJwtPayload(token);
+    if (payload) {
+      /** get user from token */
+      const id = payload.id as number;
+      const user = await userRepo.getUserById(id);
+
+      if (user) {
+        /** check user active status */
+        if (!user["is_active"]) {
+          throw new httpErrors.Unauthorized("Inactive user status");
+        }
+
+        return {
+          "access_token": jwt.getAuthToken(user),
+          "refresh_token": jwt.getRefreshToken(user),
+        };
+      }
+    }
+  } catch (err) {
+    throw new httpErrors.Unauthorized("Invalid token object");
+  }
+};
