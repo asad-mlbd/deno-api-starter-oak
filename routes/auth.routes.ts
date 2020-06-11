@@ -5,7 +5,6 @@ import {
   lengthBetween,
 } from "https://deno.land/x/validasaur@v0.7.0/src/rules.ts";
 
-import * as userService from "./../services/user.service.ts";
 import * as authService from "./../services/auth.service.ts";
 import { requestValidator } from "./../middlewares/request-validator.middleware.ts";
 

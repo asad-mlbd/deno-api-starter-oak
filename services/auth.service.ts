@@ -33,15 +33,18 @@ export const loginUser = async (credential: any) => {
   const user = await userRepo.getUserByEmail(email);
 
   if (user) {
-    const passHash = user.password;
-    const isValidPass = await encription.compare(password, passHash);
-    if (isValidPass) {
-      const token = {
-        "access_token": jwt.getAuthToken(user),
-        "refresh_token": jwt.getRefreshToken(user),
-      };
-
-      return token;
+    /** check user active status */
+    if (user["is_active"]) {
+      /** check password */
+      const passHash = user.password;
+      const isValidPass = await encription.compare(password, passHash);
+      /** return token */
+      if (isValidPass) {
+        return {
+          "access_token": jwt.getAuthToken(user),
+          "refresh_token": jwt.getRefreshToken(user),
+        };
+      }
     }
   }
 
