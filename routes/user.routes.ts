@@ -34,21 +34,6 @@ const getUserById = async (ctx: Context) => {
 };
 
 /**
- * create user
- */
-const createUser = [
-  /** request validation middleware */
-  requestValidator({ bodyRules: userSchema }),
-  /** router handler */
-  async (ctx: Context) => {
-    const request = ctx.request;
-    const userData = (await request.body()).value;
-    const user = await userService.createUser(userData);
-    ctx.response.body = user;
-  },
-];
-
-/**
  * update user
  */
 const updateUser = [
@@ -73,4 +58,4 @@ const deleteUser = async (ctx: Context) => {
   ctx.response.status = Status.NoContent;
 };
 
-export { getUsers, getUserById, createUser, updateUser, deleteUser };
+export { getUsers, getUserById, updateUser, deleteUser };

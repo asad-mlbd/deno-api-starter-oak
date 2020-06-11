@@ -16,7 +16,6 @@ router
 router
   .get("/users", userRoutes.getUsers)
   .get("/users/:id", userRoutes.getUserById)
-  .post("/users", ...userRoutes.createUser)
   .put("/users/:id", ...userRoutes.updateUser)
   .delete("/users/:id", userRoutes.deleteUser);
 

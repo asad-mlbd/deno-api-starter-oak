@@ -38,6 +38,7 @@ export const loginUser = async (credential: any) => {
     if (isValidPass) {
       const token = {
         "access_token": jwt.getAuthToken(user),
+        "refresh_token": jwt.getRefreshToken(user),
       };
 
       return token;
