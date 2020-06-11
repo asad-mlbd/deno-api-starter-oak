@@ -23,6 +23,10 @@ const errorMiddleware = async (ctx: Context, next: () => Promise<void>) => {
         : "Internal Server Error";
     }
 
+    if (config.ENV === "dev" || config.ENV === "development") {
+      console.log(err);
+    }
+
     ctx.response.status = status;
     ctx.response.body = { status, message };
   }
