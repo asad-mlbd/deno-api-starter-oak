@@ -16,9 +16,9 @@ router
   .post("/token", ...authRoutes.refreshToken);
 
 router
-  .get("/users", userRoutes.getUsers)
-  .get("/users/:id", userRoutes.getUserById)
+  .get("/users", ...userRoutes.getUsers)
+  .get("/users/:id", ...userRoutes.getUserById)
   .put("/users/:id", ...userRoutes.updateUser)
-  .delete("/users/:id", userRoutes.deleteUser);
+  .delete("/users/:id", ...userRoutes.deleteUser);
 
 export { router };
