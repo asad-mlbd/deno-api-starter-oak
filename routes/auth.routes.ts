@@ -1,4 +1,4 @@
-import { Context } from "https://deno.land/x/oak@v5.0.0/mod.ts";
+import { Context } from "./../types.ts";
 import {
   required,
   isEmail,
@@ -49,6 +49,7 @@ const login = [
   requestValidator({ bodyRules: loginSchema }),
   /** router handler */
   async (ctx: Context) => {
+    console.log(ctx.user);
     const request = ctx.request;
     const credential = (await request.body()).value;
     const token = await authService.loginUser(credential);

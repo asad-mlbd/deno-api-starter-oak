@@ -2,13 +2,9 @@ import {
   Jose,
   Payload,
   makeJwt,
-
   setExpiration,
 } from "https://deno.land/x/djwt@v0.9.0/create.ts";
-import {
-  validateJwt,
-  JwtObject,
-} from "https://deno.land/x/djwt@v0.9.0/validate.ts";
+import { validateJwt } from "https://deno.land/x/djwt@v0.9.0/validate.ts";
 import { config } from "./../config/config.ts";
 
 const {
@@ -45,10 +41,12 @@ const getRefreshToken = (user: any) => {
 };
 
 const getJwtPayload = async (token: string): Promise<any | null> => {
-  const jwtObject = await validateJwt(token, JWT_TOKEN_SECRET);
-  if (jwtObject && jwtObject.payload) {
-    return jwtObject.payload;
-  }
+  try {
+    const jwtObject = await validateJwt(token, JWT_TOKEN_SECRET);
+    if (jwtObject && jwtObject.payload) {
+      return jwtObject.payload;
+    }
+  } catch (err) {}
   return null;
 };
 

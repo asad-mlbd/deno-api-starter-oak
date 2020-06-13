@@ -3,7 +3,8 @@ import {
   ValidationErrors,
   ValidationRules,
 } from "https://deno.land/x/validasaur@v0.7.0/src/mod.ts";
-import { Context, httpErrors } from "https://deno.land/x/oak@v5.0.0/mod.ts";
+import { httpErrors } from "https://deno.land/x/oak@v5.0.0/mod.ts";
+import { Context } from "./../types.ts";
 
 /**
  * get single error message from errors

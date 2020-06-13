@@ -1,5 +1,4 @@
 import {
-  Context,
   helpers,
   Status,
 } from "https://deno.land/x/oak@v5.0.0/mod.ts";
@@ -9,6 +8,7 @@ import {
 } from "https://deno.land/x/validasaur@v0.7.0/src/rules.ts";
 import { requestValidator } from "./../middlewares/request-validator.middleware.ts";
 import * as userService from "./../services/user.service.ts";
+import { Context } from "./../types.ts";
 
 /** request body schema for user create/update */
 const userSchema = {
