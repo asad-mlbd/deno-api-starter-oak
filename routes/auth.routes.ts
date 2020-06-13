@@ -1,4 +1,9 @@
-import { Context } from "./../types.ts";
+import {
+  Context,
+  CreateUser,
+  RefreshToken,
+  LoginCredential,
+} from "./../types.ts";
 import {
   required,
   isEmail,
@@ -29,7 +34,7 @@ const register = [
   /** router handler */
   async (ctx: Context) => {
     const request = ctx.request;
-    const userData = (await request.body()).value;
+    const userData = (await request.body()).value as CreateUser;
     const user = await authService.registerUser(userData);
     ctx.response.body = user;
   },
@@ -49,9 +54,8 @@ const login = [
   requestValidator({ bodyRules: loginSchema }),
   /** router handler */
   async (ctx: Context) => {
-    console.log(ctx.user);
     const request = ctx.request;
-    const credential = (await request.body()).value;
+    const credential = (await request.body()).value as LoginCredential;
     const token = await authService.loginUser(credential);
     ctx.response.body = token;
   },
@@ -66,8 +70,11 @@ const refreshToken = [
   /** router handler */
   async (ctx: Context) => {
     const request = ctx.request;
-    const data = (await request.body()).value;
-    const token = await authService.refreshToken(data["refresh_token"]);
+    const data = (await request.body()).value as RefreshToken;
+
+    const token = await authService.refreshToken(
+      data["refresh_token"],
+    );
     ctx.response.body = token;
   },
 ];

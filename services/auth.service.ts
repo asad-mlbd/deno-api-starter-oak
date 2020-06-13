@@ -2,11 +2,13 @@ import * as userRepo from "./../repositories/user.repository.ts";
 import { httpErrors } from "https://deno.land/x/oak@v5.0.0/mod.ts";
 import * as encription from "../helpers/encription.ts";
 import * as jwt from "../helpers/jwt.ts";
+import { LoginCredential } from "../types.ts";
+import { CreateUser } from "../types/user/create-user.ts";
 
 /**
  * register user
  */
-export const registerUser = async (userData: any) => {
+export const registerUser = async (userData: CreateUser) => {
   try {
     /** encript user's plain password */
     const { password } = userData;
@@ -27,7 +29,7 @@ export const registerUser = async (userData: any) => {
 /**
  * login user
  */
-export const loginUser = async (credential: any) => {
+export const loginUser = async (credential: LoginCredential) => {
   /** find user by email */
   const { email, password } = credential;
   const user = await userRepo.getUserByEmail(email);
