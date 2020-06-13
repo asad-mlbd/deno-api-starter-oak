@@ -1,4 +1,5 @@
 import { db } from "./../db/db.ts";
+import { UserInfo } from "../types.ts";
 
 /**
  * Get all users list
@@ -6,7 +7,7 @@ import { db } from "./../db/db.ts";
 const getUsers = async () => {
   return await db.query(`
     SELECT 
-      id, name, email, 
+      id, name, email, roles,
       is_active, created_at, updated_at 
     FROM users
   `);
@@ -19,7 +20,7 @@ const getUserById = async (id: number) => {
   const users = await db.query(
     `
     SELECT
-      id, name, email, 
+      id, name, email, roles,
       is_active, created_at, updated_at
     FROM users where id = ? limit 0, 1`,
     [id],
@@ -35,7 +36,7 @@ const getUserByEmail = async (email: string) => {
   const users = await db.query(
     `
     SELECT
-      id, name, email, password,
+      id, name, email, password, roles,
       is_active, created_at, updated_at
     FROM users where email = ? limit 0, 1`,
     [email],
@@ -47,17 +48,23 @@ const getUserByEmail = async (email: string) => {
  * Create user
  */
 const createUser = async (
-  user: { name: string; email: string; password: string },
+  user: UserInfo,
 ) => {
   const { name, email, password } = user;
+  const roles = user.roles.join(",");
+
   const { lastInsertId } = await db.query(
     `
-    INSERT into users 
-      (id, name, email, password, is_active, created_at, updated_at)
-    VALUES 
-      (DEFAULT, ? , ? , ?, 1, DEFAULT, DEFAULT);
+    INSERT into users (
+      id, name, email, roles, password, 
+      is_active, created_at, updated_at
+    )
+    VALUES (
+      DEFAULT, ? , ? , ?, ?, 
+      1, DEFAULT, DEFAULT
+    );
     `,
-    [name, email, password],
+    [name, email, roles, password],
   );
 
   return await getUserById(lastInsertId);

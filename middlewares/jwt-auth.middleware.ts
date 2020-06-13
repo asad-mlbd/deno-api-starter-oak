@@ -1,6 +1,5 @@
-import { Context } from "./../types.ts";
+import { Context, AuthUser } from "./../types.ts";
 import { getJwtPayload } from "../helpers/jwt.ts";
-import { AuthUser } from "../types/core/auth-user.ts";
 
 /***
  * JWTAuth middleware

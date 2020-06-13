@@ -1,2 +1,13 @@
 /** User role type */
-export type UserRole = "USER" | "ADMIN";
+export enum UserRole {
+  USER = "User",
+  ADMIN = "Admin",
+}
+
+/**
+ * list of user roles
+ */
+export const UserRoles = [
+  UserRole.ADMIN,
+  UserRole.USER,
+];
