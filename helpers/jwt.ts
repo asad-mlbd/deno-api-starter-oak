@@ -24,6 +24,7 @@ const getAuthToken = (user: any) => {
     id: user.id,
     name: user.name,
     email: user.email,
+    roles: user.roles,
     exp: setExpiration(new Date().getTime() + parseInt(JWT_ACCESS_TOKEN_EXP)),
   };
 
