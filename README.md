@@ -9,9 +9,13 @@ This is a starter project to create Deno RESTful API using oak. [oak](https://gi
  2) [Migrations](#migrations)
  3) [Modules](#modules)
  4) [Project Layout](#project-layout)
- 5) [Contributing](#contributing)
- 6) [Contributors](#contributors)
- 7) [Roadmap](#roadmap)
+ 5) [How to add new route](#how-to-add-new-route)
+ 6) [How to validate request body](#how-to-validate-request-body)
+ 7) [How to add auth guards](#how-to-add-auth-guard)
+ 8) [Error handling](#error-handling)
+ 9) [Contributing](#contributing)
+ 10)[Contributors](#contributors)
+ 11)[Roadmap](#roadmap)
 
 ## Setup
 We can run the project **with/ without Docker**. 
@@ -72,42 +76,60 @@ deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie@v1.0.
 ```
 .
 ├── .env (Make sure to create this file from given .env.example)
-├── config
-|   ├── config.ts (contains config object with env vars as attribute)
-├── db
-|   ├── db.ts (contains DB connection object)
-├── middlewares
-|   ├── error.middleware.ts (error handler middleware)
-|   ├── logger.middleware.ts (request logger)
-|   ├── timing.middleware.ts (timing middleware logging request dispatch time)
-|   ├── middlewares.ts (exports all middlewares)
-├── migrations (contains DB migration scripts)
-├── services
-|   ├── services.ts (list services)
-|   ├── user.service.ts (user service layer)
-├── repositories
-|   ├── user.repository.ts (contains repository methods for user table)
-├── helpers (contains helper methods)
-├── routes
-|   ├── user.routes.ts (router handler methods for user routes)
-|   ├── routes.ts (bind router handlers with app routes)
-├── app.ts (Contains application server)
+├── config/
+|   |── config.ts (configuration object)
+├── db/
+|   |── migrations/
+|   |── seeds/
+|   ├── db.ts (DB connection object)
+├── middlewares/
+├── migrations/
+├── services/
+├── repositories/
+├── helpers/
+├── routes/
+|── types/
+|── types.ts (all types exported here)
+├── app.ts (application server)
 └── nessie.config.ts (DB configuration for nessie migration)
 ```
-- route handlers should call service layer methods
-- service layer should deal with all business logics
-- service layer throws a meaningful error if needed
-- service layer uses repository layer methods for DB interaction
-- repository layer only deals with DB operation without any business logic
 
+## How to add a new route
+- Router hanlders are defined in `routes` folder. For each entity there should be separate routes file. For example user related CRUD router handlers are defined in `user.routes.ts` file.
+- All routes are bind with router handlers in `routes.ts` file. 
+- To create CRUD for `cat`
+    - Create file `cat.routes.ts`
+    - Write router handler methods, 
+    ```
+    //cat.routes.ts
+    import * as catService from "./../services/cat.service.ts";
+    /**
+    * get list of cats 
+    */
+    const getCats = [
+        async (ctx: Context) => {
+            const cats = await catService.getCats();
+            ctx.response.body = cats;
+        }
+    ];
 
-## Middlewares
-- Middlewares are defined in the `middlewares/` folder.
-- Sample middleware added
-    - [Logger Middleware](/middlewares/logger.middleware.ts)
-    - [Timing Middleware](/middlewares/timing.middleware.ts)
-    - [Error Middlerware](/middlewares/error.middleware.ts)
-- [More details on writing middleware](https://deno.land/x/oak#application-middleware-and-context).
+    //export route handler methods
+    exports { getCats };
+    ```
+
+    - Then bind `getCats` route handler with router in `routes.ts` file - 
+    ```
+    //routes.ts
+    import * as catRoutes from "./cat.routes.ts";
+
+    // ... router initialization codes
+
+    router
+        .get("/cats", ...catRoutes.getCats);
+    ```
+## How to validate request body
+## How to add auth guards
+## Error handling
 
 ### Contributing
 Bug reports and pull requests are welcome on GitHub at https://github.com/asad-mlbd/deno-api-starter-oak. 
