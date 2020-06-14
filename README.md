@@ -116,7 +116,6 @@ deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie@v1.0.
     //export route handler methods
     exports { getCats };
     ```
-
     - Then bind `getCats` route handler with router in `routes.ts` file - 
     ```
     //routes.ts
@@ -128,6 +127,39 @@ deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie@v1.0.
         .get("/cats", ...catRoutes.getCats);
     ```
 ## How to validate request body
+- Here we used [validasaur@v0.7.0](https://deno.land/x/validasaur@v0.7.0) module for validating forms or request body. List of available rules can be found [here](https://deno.land/x/validasaur@v0.7.0/#available-rules) 
+- [requestValidator](./middlewares/request-validator.middleware.ts) middleware added to validate request body.
+```
+//auth.routes.ts
+import {
+  required,
+  isEmail,
+} from "https://deno.land/x/validasaur@v0.7.0/src/rules.ts";
+
+import { requestValidator } from "./../middlewares/request-validator.middleware.ts";
+
+/** 
+ * request body schema 
+ * for cat create/update 
+ * */
+const catSchema = {
+  name: [required],
+  email: [required, isEmail],
+};
+
+/**
+ * create cat
+ */
+const createCat = [
+  /** request validation middleware */
+  requestValidator({ bodyRules: catSchema }),
+  /** router handler */
+  async (ctx: Context) => {
+    // ... router handler code to create cat
+  },
+];
+```
+
 ## How to add auth guards
 ## Error handling
 
