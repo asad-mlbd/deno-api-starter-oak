@@ -37,12 +37,3 @@ services:
       - ./openapi.yml:/openapi.yml
     environment:
       SWAGGER_JSON: /openapi.yml
-
-  # swagger_editor:
-  #   image: swaggerapi/swagger-editor
-  #   container_name: swagger_editor_service
-  #   ports:
-  #     - "8106:8080"
-
-  # volumes:
-  #   openapi.yml:

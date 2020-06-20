@@ -5,8 +5,6 @@ export const up: Migration = () => {
   return `
     ALTER TABLE users
     ADD roles varchar(256) AFTER email;
-
-    UPDATE users SET roles = 'User';
   `;
 };
 
