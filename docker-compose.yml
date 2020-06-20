@@ -27,3 +27,22 @@ services:
     restart: always
     ports:
       - 8080:8080
+
+  swagger_ui:
+    container_name: swagger_ui_service
+    image: swaggerapi/swagger-ui
+    ports:
+      - "8105:8080"
+    volumes:
+      - ./openapi.yml:/openapi.yml
+    environment:
+      SWAGGER_JSON: /openapi.yml
+
+  # swagger_editor:
+  #   image: swaggerapi/swagger-editor
+  #   container_name: swagger_editor_service
+  #   ports:
+  #     - "8106:8080"
+
+  # volumes:
+  #   openapi.yml:
