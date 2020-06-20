@@ -174,7 +174,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/asad-m
 
 - [x] Open API integration
 - [ ] Unit Testing
-- [ ] API Doc
+- [x] API Doc
 - [x] Validation
 - [x] JWT Auth
 - [ ] Logger
