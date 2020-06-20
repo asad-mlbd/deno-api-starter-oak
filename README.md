@@ -42,6 +42,7 @@ We can run the project **with/ without Docker**.
 - **API** 
     - Browse `api` at [http://localhost:8000](http://localhost:8000)
     - Browse (for Docker only) DB `adminer` at [http://localhost:8080](http://localhost:8080)
+    - Browse Swagger Open API Doc at [http://localhost:8105](http://localhost:8105)
 
 ## Migrations 
 We use [nessie](https://deno.land/x/nessie) to manage database migration. 
@@ -171,9 +172,9 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/asad-m
 
 ## Roadmap
 
-- [ ] Open API integration
+- [x] Open API integration
 - [ ] Unit Testing
 - [ ] API Doc
 - [x] Validation
-- [ ] JWT Auth
+- [x] JWT Auth
 - [ ] Logger
