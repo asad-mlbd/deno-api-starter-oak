@@ -4,6 +4,18 @@
 
 This is a starter project to create Deno RESTful API using oak. [oak](https://github.com/oakserver/oak) is a middleware framework and router middleware for Deno, inspired by popular Node.js framework [Koa](https://koajs.com/) and [@koa/router](https://github.com/koajs/router/).
 
+This project covers
+- Swagger Open API doc
+- Docker container environment
+- JWT authentication 
+- User authorization
+- Request validation
+- .env config management
+- Coding architecture with `Router`, `Service` & `Repository` layers
+- Application Error Handling
+- Request timing logging
+- Generic request logging
+
 ## Important links
  1) [Setup](#setup)
  2) [Migrations](#migrations)
@@ -12,7 +24,7 @@ This is a starter project to create Deno RESTful API using oak. [oak](https://gi
  5) [How to add a new route](#how-to-add-a-new-route)
  6) [How to validate request body](#how-to-validate-request-body)
  7) [How to use JWT authorization](#how-to-use-jwt-authorization)
- 8) [How to add auth guards](#how-to-add-auth-guard)
+ 8) [How to add auth guards](#how-to-add-auth-guards)
  9) [Error handling](#error-handling)
  10) [Contributing](#contributing)
  11) [Contributors](#contributors)
@@ -129,6 +141,7 @@ deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie@v1.0.
     router
         .get("/cats", ...catRoutes.getCats);
     ```
+
 ## How to validate request body
 - Here we used [validasaur@v0.7.0](https://deno.land/x/validasaur@v0.7.0) module for validating forms or request body. List of available rules can be found [here](https://deno.land/x/validasaur@v0.7.0/#available-rules) 
 - [requestValidator](./middlewares/request-validator.middleware.ts) middleware added to validate the request body.
@@ -162,6 +175,7 @@ const createCat = [
   },
 ];
 ```
+
 ## How to use JWT authorization
 - Here, We used JWT based authentication
 - Necessary JWT constants should be configured in `.env` (copy from `.env.example`).
@@ -179,6 +193,37 @@ JWT_TOKEN_SECRET=HEGbulKGDblAFYskBLml
 - Middleware [JWTAuthMiddleware](./middlewares/jwt-auth.middleware.ts) used to parse the `Authorization` header and decode the payload as `ctx.user`. 
 
 ## How to add auth guards
+- Auth guards are dependent on the `ctx.user` provided by [JWTAuthMiddleware](./middlewares/jwt-auth.middleware.ts) middleware.
+- To define different levels of authentication guard in different route handlers, middleware [userGuard](./middlewares/user-guard.middleware.ts) defined.
+- `userGuard` middleware optionally takes allowed user's roles as parameter. Otherwise, it will check only for the signed user.
+- Here is the example usage:-
+```
+//user.routes.ts
+
+/**
+ * get list of users 
+ * user with ADMIN role only can access
+ */
+const getUsers = [
+  userGuard(UserRole.ADMIN),
+  async (ctx: Context) => {
+    // ... route handlers code
+  },
+];
+
+
+/**
+ * get signed user detail 
+ * any authenticated user can access
+ */
+const getMe = [
+  userGuard(),
+  async (ctx: Context) => {
+    // ... route handlers code
+  },
+];
+```
+
 
 ## Error handling
 
