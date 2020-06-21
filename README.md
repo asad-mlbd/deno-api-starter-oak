@@ -14,8 +14,8 @@ This is a starter project to create Deno RESTful API using oak. [oak](https://gi
  7) [How to add auth guards](#how-to-add-auth-guard)
  8) [Error handling](#error-handling)
  9) [Contributing](#contributing)
- 10)[Contributors](#contributors)
- 11)[Roadmap](#roadmap)
+ 10) [Contributors](#contributors)
+ 11) [Roadmap](#roadmap)
 
 ## Setup
 We can run the project **with/ without Docker**. 
@@ -92,6 +92,7 @@ deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie@v1.0.
 |── types/
 |── types.ts (all types exported here)
 ├── app.ts (application server)
+├── openapi.yml (Swagger open api definition)
 └── nessie.config.ts (DB configuration for nessie migration)
 ```
 
@@ -173,8 +174,8 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/asad-m
 ## Roadmap
 
 - [x] Open API integration
-- [ ] Unit Testing
 - [x] API Doc
 - [x] Validation
 - [x] JWT Auth
+- [ ] Unit Testing
 - [ ] Logger
