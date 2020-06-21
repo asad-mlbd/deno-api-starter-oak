@@ -9,13 +9,14 @@ This is a starter project to create Deno RESTful API using oak. [oak](https://gi
  2) [Migrations](#migrations)
  3) [Modules](#modules)
  4) [Project Layout](#project-layout)
- 5) [How to add new route](#how-to-add-new-route)
+ 5) [How to add a new route](#how-to-add-a-new-route)
  6) [How to validate request body](#how-to-validate-request-body)
- 7) [How to add auth guards](#how-to-add-auth-guard)
- 8) [Error handling](#error-handling)
- 9) [Contributing](#contributing)
- 10) [Contributors](#contributors)
- 11) [Roadmap](#roadmap)
+ 7) [How to use JWT authorization](#how-to-use-jwt-authorization)
+ 8) [How to add auth guards](#how-to-add-auth-guard)
+ 9) [Error handling](#error-handling)
+ 10) [Contributing](#contributing)
+ 11) [Contributors](#contributors)
+ 12) [Roadmap](#roadmap)
 
 ## Setup
 We can run the project **with/ without Docker**. 
@@ -23,7 +24,7 @@ We can run the project **with/ without Docker**.
     - For dockerized environment we need 
         - docker, 
         - docker-compose installed.
-    - To run API server with out Docker we need
+    - To run API server without Docker we need
         - MySQL server running &
         - Deno run time installed
 - **Configuration**
@@ -40,9 +41,9 @@ We can run the project **with/ without Docker**.
     $ deno run --allow-read --allow-net app.ts
     ```
 - **API** 
-    - Browse `api` at [http://localhost:8000](http://localhost:8000)
-    - Browse (for Docker only) DB `adminer` at [http://localhost:8080](http://localhost:8080)
-    - Browse Swagger Open API Doc at [http://localhost:8105](http://localhost:8105)
+    - Browse `API` at [http://localhost:8000](http://localhost:8000)
+    - Browse (for Docker only) DB `Adminer` at [http://localhost:8080](http://localhost:8080)
+    - Browse `Swagger Open API` Doc at [http://localhost:8105](http://localhost:8105)
 
 ## Migrations 
 We use [nessie](https://deno.land/x/nessie) to manage database migration. 
@@ -130,7 +131,7 @@ deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie@v1.0.
     ```
 ## How to validate request body
 - Here we used [validasaur@v0.7.0](https://deno.land/x/validasaur@v0.7.0) module for validating forms or request body. List of available rules can be found [here](https://deno.land/x/validasaur@v0.7.0/#available-rules) 
-- [requestValidator](./middlewares/request-validator.middleware.ts) middleware added to validate request body.
+- [requestValidator](./middlewares/request-validator.middleware.ts) middleware added to validate the request body.
 ```
 //auth.routes.ts
 import {
@@ -161,8 +162,24 @@ const createCat = [
   },
 ];
 ```
+## How to use JWT authorization
+- Here, We used JWT based authentication
+- Necessary JWT constants should be configured in `.env` (copy from `.env.example`).
+```
+# Access token validity in ms
+JWT_ACCESS_TOKEN_EXP=600000
+
+# Refresh token validity in ms
+JWT_REFRESH_TOKEN_EXP=3600000
+
+# Secret secuirity string
+JWT_TOKEN_SECRET=HEGbulKGDblAFYskBLml
+```
+- Request header should contain JWT bearer token as `Authorization` key.
+- Middleware [JWTAuthMiddleware](./middlewares/jwt-auth.middleware.ts) used to parse the `Authorization` header and decode the payload as `ctx.user`. 
 
 ## How to add auth guards
+
 ## Error handling
 
 ### Contributing
