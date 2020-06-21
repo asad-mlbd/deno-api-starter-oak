@@ -8,10 +8,15 @@ host: "localhost:8000"
 tags:
 - name: "Auth"
   description: "JWT authentication"
-- name: "User"
+- name: "Users"
   description: "User enity CRUD operation"
 schemes:
 - "http"
+securityDefinitions:
+  BearerAuth:
+    type: apiKey
+    in: header
+    name: Authorization
 paths:
   /login:
     post:
@@ -28,20 +33,20 @@ paths:
         name: "body"
         required: true
         schema:
-          $ref: "#/definitions/LoginRequest"
+          $ref: "#/definitions/LoginCredential"
       responses:
         "200":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/LoginResponse"
+            $ref: "#/definitions/AuthToken"
         "400":
           description: "Invalid request"
         "401":
           description: "Unauthorized"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
+      # security:
+      # - petstore_auth:
+      #   - "write:pets"
+        # - "read:pets"
   /register:
     post:
       tags:
@@ -55,29 +60,114 @@ paths:
         name: "body"
         required: true
         schema:
-          $ref: "#/definitions/RegistrationRequest"
+          $ref: "#/definitions/UserRegistration"
       responses:
         "200":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/RegistrationResponse"
+            $ref: "#/definitions/UserModel"
         "400":
           description: "Invalid request"
-  
-securityDefinitions:
-  petstore_auth:
-    type: "oauth2"
-    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
-    flow: "implicit"
-    scopes:
-      write:pets: "modify pets in your account"
-      read:pets: "read your pets"
-  api_key:
-    type: "apiKey"
-    name: "api_key"
-    in: "header"
+  /users:
+    get:
+      tags:
+      - "Users"
+      summary: "List user list"
+      security:
+        - BearerAuth: []
+      description: "Get list of users, called by admin user"
+      operationId: "getUserList"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/UserModel"
+        "401":
+          description: "Unauthorized user"
+  /users/{userId}:
+    get:
+      tags:
+      - "Users"
+      summary: "Find user by userId"
+      security:
+        - BearerAuth: []
+      description: "Get users, called by admin user"
+      operationId: "getUserById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "path"
+        description: "ID of user to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+              $ref: "#/definitions/UserModel"
+        "401":
+          description: "Unauthorized user"
+        "404":
+          description: "User not found"
+    put:
+      tags:
+      - "Users"
+      summary: "Update user by userId"
+      security:
+        - BearerAuth: []
+      description: "Get users, called by admin user"
+      operationId: "updateUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "path"
+        description: "ID of user to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/UserUpdateData"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/UserModel"
+        "401":
+          description: "Unauthorized user"
+        "404":
+          description: "User not found"
+    delete:
+      tags:
+      - "Users"  
+      summary: Delete user by userId
+      security:
+        - BearerAuth: []
+      description: "Delete users, called by admin user"
+      operationId: "deleteUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "path"
+        description: "ID of user to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "204":
+          description: "successful operation"
 definitions:
-  LoginRequest:
+  LoginCredential:
     type: "object"
     properties:
       email:
@@ -86,7 +176,7 @@ definitions:
       password:
         type: "string"
         format: "string"
-  LoginResponse:
+  AuthToken:
     type: "object"
     properties:
       access_token:
@@ -95,7 +185,7 @@ definitions:
       refresh_token:
         type: "string"
         format: "string"
-  RegistrationRequest:
+  UserRegistration:
     type: "object"
     properties:
       name:
@@ -107,7 +197,16 @@ definitions:
       password:
         type: "string"
         format: "string"
-  RegistrationResponse:
+  UserUpdateData:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        format: "string"
+      email:
+        type: "string"
+        format: "string"
+  UserModel:
     type: "object"
     properties:
       id:
