@@ -1,8 +1,12 @@
 import { Context } from "./../types.ts";
 const loggerMiddleware = async (ctx: Context, next: () => Promise<void>) => {
   await next();
-  const rt = ctx.response.headers.get("X-Response-Time");
-  console.log(`${ctx.request.method} ${ctx.request.url} - ${rt}`);
+  const reqTime = ctx.response.headers.get("X-Response-Time");
+  const reqId = ctx.response.headers.get("X-Response-Id");
+  const status = ctx.response.status;
+  console.log(
+    `${reqId} ${ctx.request.method} ${ctx.request.url} - ${reqTime} status: ${status}`,
+  );
 };
 
 export { loggerMiddleware };
