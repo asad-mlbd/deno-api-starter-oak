@@ -1,4 +1,4 @@
-import { Context } from "./../types.ts";
+import type { Context } from "./../types.ts";
 const loggerMiddleware = async (ctx: Context, next: () => Promise<void>) => {
   await next();
   const reqTime = ctx.response.headers.get("X-Response-Time");

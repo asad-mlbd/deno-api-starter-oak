@@ -1,4 +1,4 @@
-import { Context } from "./../types.ts";
+import type { Context } from "./../types.ts";
 import { v4 as uuid } from "https://deno.land/std@0.62.0/uuid/mod.ts";
 
 /**

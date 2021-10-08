@@ -1,4 +1,4 @@
-import { Context } from "./../types.ts";
+import type { Context } from "./../types.ts";
 const timingMiddleware = async (ctx: Context, next: () => Promise<void>) => {
   const start = Date.now();
   await next();

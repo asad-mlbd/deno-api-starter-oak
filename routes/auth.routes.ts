@@ -8,7 +8,7 @@ import {
   required,
   isEmail,
   lengthBetween,
-} from "https://deno.land/x/validasaur@v0.7.0/src/rules.ts";
+} from "https://deno.land/x/validasaur@v0.15.0/mod.ts";
 
 import * as authService from "./../services/auth.service.ts";
 import { requestValidator } from "./../middlewares/request-validator.middleware.ts";
