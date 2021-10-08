@@ -3,8 +3,8 @@ import {
   Payload,
   makeJwt,
   setExpiration,
-} from "https://deno.land/x/djwt@v0.9.0/create.ts";
-import { validateJwt } from "https://deno.land/x/djwt@v0.9.0/validate.ts";
+} from "https://deno.land/x/djwt@v1.0/create.ts";
+import { validateJwt } from "https://deno.land/x/djwt@v1.0/validate.ts";
 import { config } from "./../config/config.ts";
 
 const {
@@ -13,8 +13,10 @@ const {
   JWT_REFRESH_TOKEN_EXP,
 } = config;
 
+const JWTAlgorithm = "HS256";
+
 const header: Jose = {
-  alg: "HS256",
+  alg: JWTAlgorithm,
   typ: "JWT",
 };
 
@@ -43,12 +45,12 @@ const getRefreshToken = (user: any) => {
 
 const getJwtPayload = async (token: string): Promise<any | null> => {
   try {
-    const jwtObject = await validateJwt(token, JWT_TOKEN_SECRET);
-    if (jwtObject && jwtObject.payload) {
+    const jwtObject = await validateJwt({jwt: token, key: JWT_TOKEN_SECRET, algorithm: [JWTAlgorithm], critHandlers: {}});
+    if (jwtObject.isValid) {
       return jwtObject.payload;
     }
   } catch (err) {}
   return null;
 };
 
-export { getAuthToken, getRefreshToken, getJwtPayload };
+export { getAuthToken, getRefreshToken, getJwtPayload, JWTAlgorithm };

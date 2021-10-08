@@ -1,5 +1,6 @@
 import { Context, AuthUser } from "./../types.ts";
-import { validateJwt } from "https://deno.land/x/djwt@v0.9.0/validate.ts";
+import { validateJwt } from "https://deno.land/x/djwt@v1.0/validate.ts";
+import { JWTAlgorithm } from "./../helpers/jwt.ts";
 
 /**
  * Decode token and returns payload
@@ -8,8 +9,8 @@ import { validateJwt } from "https://deno.land/x/djwt@v0.9.0/validate.ts";
  */
 const getJwtPayload = async (token: string, secret: string): Promise<any | null> => {
   try {
-    const jwtObject = await validateJwt(token, secret);
-    if (jwtObject && jwtObject.payload) {
+    const jwtObject = await validateJwt({jwt: token, key: secret, algorithm: [JWTAlgorithm], critHandlers: {}});
+    if (jwtObject.isValid) {
       return jwtObject.payload;
     }
   } catch (err) {}

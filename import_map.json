@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "https://deno.land/std@v0.61.0/encoding/hex.ts": "https://deno.land/std@0.61.0/encoding/hex.ts",
+    "https://deno.land/std@v0.61.0/encoding/base64url.ts": "https://deno.land/std@0.61.0/encoding/base64url.ts",
+    "https://deno.land/std@v0.61.0/hash/sha256.ts": "https://deno.land/std@0.61.0/hash/sha256.ts",
+    "https://deno.land/std@v0.61.0/hash/sha512.ts": "https://deno.land/std@0.61.0/hash/sha512.ts"
+  }
+}
