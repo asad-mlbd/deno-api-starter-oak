@@ -79,12 +79,12 @@ deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie@v1.0.
 
 | Package  | Purpose |
 | ---------|---------|
-|[oak@v5.0.0](https://deno.land/x/oak@v5.0.0)| Deno middleware framework|
+|[oak@v6.2.0](https://deno.land/x/oak@v6.2.0)| Deno middleware framework|
 |[dotenv@v0.4.2](https://deno.land/x/dotenv@v0.4.2)| Read env variables|
 |[mysql@2.2.0](https://deno.land/x/mysql@2.2.0)|MySQL driver for Deno|
 |[nessie@v1.0.0-rc3](https://deno.land/x/nessie@v1.0.0-rc3)| DB migration tool for Deno|
 |[validasaur@v0.7.0](https://deno.land/x/validasaur@v0.7.0)| validation library|
-|[djwt@v1.0](https://deno.land/x/djwt@v1.0)| JWT token encoding|
+|[djwt@v1.1](https://deno.land/x/djwt@v1.1)| JWT token encoding|
 |[bcrypt@v0.2.1](https://deno.land/x/bcrypt@v0.2.1)| bcrypt encription lib|
 
 ### Project Layout 

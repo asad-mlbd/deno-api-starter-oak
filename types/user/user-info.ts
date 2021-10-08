@@ -1,5 +1,5 @@
-import { CreateUser } from "./create-user.ts";
-import { UserRole } from "./user-role.ts";
+import type { CreateUser } from "./create-user.ts";
+import type { UserRole } from "./user-role.ts";
 
 /** Request body to create user */
 export type UserInfo = CreateUser & {

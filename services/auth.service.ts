@@ -1,5 +1,5 @@
 import * as userRepo from "./../repositories/user.repository.ts";
-import { httpErrors } from "https://deno.land/x/oak@v5.0.0/mod.ts";
+import { httpErrors } from "https://deno.land/x/oak@v6.2.0/mod.ts";
 import * as encription from "../helpers/encription.ts";
 import * as jwt from "../helpers/jwt.ts";
 import {

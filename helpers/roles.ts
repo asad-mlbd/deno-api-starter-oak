@@ -1,5 +1,5 @@
 import type { AuthUser } from "../types.ts";
-import { UserRole } from "../types/user/user-role.ts";
+import type { UserRole } from "../types/user/user-role.ts";
 
 const hasUserRole = (user: AuthUser, roles: UserRole | UserRole[]) => {
   const userRoles = user.roles.split(",")

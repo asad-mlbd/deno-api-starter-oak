@@ -1,5 +1,5 @@
 import type { Context, AuthUser } from "./../types.ts";
-import { validateJwt } from "https://deno.land/x/djwt@v1.0/validate.ts";
+import { validateJwt } from "https://deno.land/x/djwt@v1.1/validate.ts";
 import { JWTAlgorithm } from "./../helpers/jwt.ts";
 
 /**

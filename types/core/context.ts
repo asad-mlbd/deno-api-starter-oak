@@ -1,5 +1,5 @@
-import { Context as OakContext } from "https://deno.land/x/oak@v5.0.0/mod.ts";
-import { AuthUser } from "./../auth/auth-user.ts";
+import { Context as OakContext } from "https://deno.land/x/oak@v6.2.0/mod.ts";
+import type { AuthUser } from "./../auth/auth-user.ts";
 
 /**
  * Custom appilication context

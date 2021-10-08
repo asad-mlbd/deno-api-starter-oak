@@ -1,4 +1,4 @@
-import { Application } from "https://deno.land/x/oak@v5.0.0/mod.ts";
+import { Application } from "https://deno.land/x/oak@v6.2.0/mod.ts";
 import * as middlewares from "./middlewares/middlewares.ts";
 import { oakCors } from "https://deno.land/x/cors/mod.ts";
 import { router } from "./routes/routes.ts";

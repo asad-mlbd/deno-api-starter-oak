@@ -1,4 +1,4 @@
-import { Router } from "https://deno.land/x/oak@v5.0.0/mod.ts";
+import { Router } from "https://deno.land/x/oak@v6.2.0/mod.ts";
 import type { Context } from "./../types.ts";
 
 import * as authRoutes from "./auth.routes.ts";
