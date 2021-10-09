@@ -7,5 +7,5 @@ WORKDIR /usr/src/app
 COPY . .
 
 USER deno
-RUN deno cache app.ts
-CMD ["run", "--allow-read", "--allow-net", "--unstable", "app.ts"]
+RUN deno cache --unstable --importmap import_map.json app.ts
+CMD ["run", "--allow-read", "--allow-net", "--unstable", "--importmap importmap.json", "app.ts"]

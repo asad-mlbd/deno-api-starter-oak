@@ -1,5 +1,5 @@
 import { db } from "./../db/db.ts";
-import { UserInfo } from "../types.ts";
+import type { UserInfo } from "../types.ts";
 
 /**
  * Get all users list

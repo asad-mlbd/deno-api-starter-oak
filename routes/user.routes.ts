@@ -2,14 +2,15 @@ import {
   helpers,
   Status,
   httpErrors,
-} from "https://deno.land/x/oak@v5.0.0/mod.ts";
+} from "https://deno.land/x/oak@v6.2.0/mod.ts";
 import {
   required,
   isEmail,
-} from "https://deno.land/x/validasaur@v0.7.0/src/rules.ts";
+} from "https://deno.land/x/validasaur@v0.15.0/mod.ts";
 import * as userService from "./../services/user.service.ts";
 import { requestValidator, userGuard } from "./../middlewares/middlewares.ts";
-import { Context, UserRole } from "./../types.ts";
+import type { Context} from "./../types.ts";
+import { UserRole} from "./../types.ts";
 import { hasUserRole } from "../helpers/roles.ts";
 
 /** request body schema for user create/update */

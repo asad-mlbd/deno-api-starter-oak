@@ -1,9 +1,9 @@
 import {
   isHttpError,
   Status,
-} from "https://deno.land/x/oak@v5.0.0/mod.ts";
+} from "https://deno.land/x/oak@v6.2.0/mod.ts";
 import { config } from "./../config/config.ts";
-import { Context } from "./../types.ts";
+import type { Context } from "./../types.ts";
 
 const errorMiddleware = async (ctx: Context, next: () => Promise<void>) => {
   try {
