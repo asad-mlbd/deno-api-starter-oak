@@ -4,7 +4,7 @@
 
 This is a starter project to create Deno RESTful API using oak. [oak](https://github.com/oakserver/oak) is a middleware framework and router middleware for Deno, inspired by popular Node.js framework [Koa](https://koajs.com/) and [@koa/router](https://github.com/koajs/router/).
 
-Note: Only Deno 1.0 is supported at the moment (work is ongoing to support newer versions).
+Note: Only Deno 1.4.2 is supported at the moment (work is ongoing to support newer versions).
 
 This project covers
 - Swagger Open API doc
