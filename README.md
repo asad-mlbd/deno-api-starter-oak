@@ -52,7 +52,7 @@ We can run the project **with/ without Docker**.
 
     - For non-docker run API server with Deno run time
     ```
-    $ deno run --allow-read --allow-net --unstable --importmap import_map.json app.ts
+    $ deno run --allow-read --allow-net --unstable --importmap importmap/map.json app.ts
     ```
 - **API** 
     - Browse `API` at [http://localhost:8000](http://localhost:8000)
@@ -84,7 +84,7 @@ deno run --allow-net --allow-read --allow-write https://deno.land/x/nessie@v1.0.
 |[mysql@2.2.0](https://deno.land/x/mysql@2.2.0)|MySQL driver for Deno|
 |[nessie@v1.0.0-rc3](https://deno.land/x/nessie@v1.0.0-rc3)| DB migration tool for Deno|
 |[validasaur@v0.7.0](https://deno.land/x/validasaur@v0.7.0)| validation library|
-|[djwt@v1.1](https://deno.land/x/djwt@v1.1)| JWT token encoding|
+|[djwt@v1.4](https://deno.land/x/djwt@v1.4)| JWT token encoding|
 |[bcrypt@v0.2.1](https://deno.land/x/bcrypt@v0.2.1)| bcrypt encription lib|
 
 ### Project Layout 

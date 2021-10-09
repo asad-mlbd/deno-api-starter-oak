@@ -6,6 +6,7 @@ import {
   CreateUser,
   UserRole,
   UserInfo,
+  RefreshToken,
   LoginCredential,
 } from "../types.ts";
 
@@ -60,10 +61,10 @@ export const loginUser = async (credential: LoginCredential) => {
   throw new httpErrors.Unauthorized("Wrong credential");
 };
 
-export const refreshToken = async (token: string) => {
+export const jwtAuth = async (token: RefreshToken) => {
   try {
     // todo: check token intention
-    const payload = await jwt.getJwtPayload(token);
+    const payload = await jwt.getJwtPayload(token.value);
     if (payload) {
       /** get user from token */
       const id = payload.id as number;

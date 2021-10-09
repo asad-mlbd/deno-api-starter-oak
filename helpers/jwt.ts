@@ -3,8 +3,8 @@ import {
   Payload,
   makeJwt,
   setExpiration,
-} from "https://deno.land/x/djwt@v1.1/create.ts";
-import { validateJwt } from "https://deno.land/x/djwt@v1.1/validate.ts";
+} from "https://deno.land/x/djwt@v1.4/create.ts";
+import { validateJwt } from "https://deno.land/x/djwt@v1.4/validate.ts";
 import { config } from "./../config/config.ts";
 
 const {

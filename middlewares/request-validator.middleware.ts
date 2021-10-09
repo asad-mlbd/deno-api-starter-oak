@@ -30,12 +30,14 @@ const requestValidator = ({ bodyRules }: { bodyRules: ValidationRules }) => {
     const request = ctx.request;
     const body = (await request.body()).value;
 
-    /** check rules */
-    const [isValid, errors] = await validate(body, bodyRules);
-    if (!isValid) {
-      /** if error found, throw bad request error */
-      const message = getErrorMessage(errors);
-      throw new httpErrors.BadRequest(message);
+    if (body) {
+      /** check rules */
+      const [isValid, errors] = await validate(body, bodyRules);
+      if (!isValid) {
+        /** if error found, throw bad request error */
+        const message = getErrorMessage(errors);
+        throw new httpErrors.BadRequest(message);
+      }
     }
 
     await next();
