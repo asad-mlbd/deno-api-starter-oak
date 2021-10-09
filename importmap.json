@@ -7,8 +7,6 @@
     "https://deno.land/std@0.53.0/path/posix.ts": "https://deno.land/std@0.61.0/path/posix.ts",
     "https://deno.land/std@0.53.0/path/win32.ts": "https://deno.land/std@0.61.0/path/win32.ts",
     "https://deno.land/std@0.56.0/path/posix.ts": "https://deno.land/std@0.61.0/path/posix.ts",
-    "https://deno.land/std@0.56.0/path/win32.ts": "https://deno.land/std@0.61.0/path/win32.ts",
-    "https://deno.land/x/mysql@v2.6.1/": "https://deno.land/x/mysql@v2.7.0/",
-    "https://deno.land/x/mysql@v2.7.0/src/connection.ts": "./importmap/x/mysql@v2.7.0/src/connection.ts"
+    "https://deno.land/std@0.56.0/path/win32.ts": "https://deno.land/std@0.61.0/path/win32.ts"
   }
 }

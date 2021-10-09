@@ -1,4 +1,4 @@
-import { Client } from "https://deno.land/x/mysql@v2.6.1/mod.ts";
+import { Client } from "https://deno.land/x/mysql@v2.7.0/mod.ts";
 import { config } from "./../config/config.ts";
 
 const port = config.DB_PORT ? parseInt(config.DB_PORT || "") : undefined;

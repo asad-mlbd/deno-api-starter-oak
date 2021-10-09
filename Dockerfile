@@ -8,4 +8,4 @@ COPY . .
 
 USER deno
 RUN deno cache --unstable --importmap import_map.json app.ts
-CMD ["run", "--allow-read", "--allow-net", "--unstable", "--importmap importmap/map.json", "app.ts"]
+CMD ["run", "--allow-read", "--allow-net", "--unstable", "--importmap importmap.json", "app.ts"]

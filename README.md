@@ -52,7 +52,7 @@ We can run the project **with/ without Docker**.
 
     - For non-docker run API server with Deno run time
     ```
-    $ deno run --allow-read --allow-net --unstable --importmap importmap/map.json app.ts
+    $ deno run --allow-read --allow-net --unstable --importmap importmap.json app.ts
     ```
 - **API** 
     - Browse `API` at [http://localhost:8000](http://localhost:8000)
